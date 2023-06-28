@@ -5,5 +5,5 @@ $Name = $Env:COMPUTERNAME
 $Version = (Get-ComputerInfo | Select-Object OsVersion).osversion
 
 # Logical Disk Count
-$DiskCoount = (Get-Ciminstance CIM_LogicalDisk).count
+$DiskCount = (Get-Ciminstance CIM_LogicalDisk).count
 
