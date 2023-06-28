@@ -21,4 +21,5 @@ $obj = [PSCustomObject]@{
    DiscCount = "$DiskCount"
 }
 
+#writing the output of the custom object 
 Write-output $obj
