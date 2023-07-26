@@ -1,3 +1,8 @@
+function Get-PowerSmell {
+    
+    param (
+$DriveLetter
+    )
 # Retrieve System Name
 $Name = $Env:COMPUTERNAME
 
@@ -8,7 +13,7 @@ $Version = (Get-ComputerInfo | Select-Object OsVersion).osversion
 $DiskCount = (Get-Ciminstance CIM_LogicalDisk).Count
 
 # Finding the Freespace of the drive(s)
-$Freespace = ($DiskInstance | Where-Object {$_.DeviceID -eq 'C:'}).freespace
+$Freespace = ($DiskInstance | Where-Object {$_.DeviceID -eq $DriveLetter}).freespace
 
 # Homework - Adding installed programs to the server repot list
 $Printers = (get-printer).Name
@@ -35,3 +40,6 @@ OStype = $systype
 
 #writing the output of the custom object 
 Write-output $obj
+}
+
+Get-PowerSmell
