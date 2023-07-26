@@ -8,7 +8,13 @@ $Version = (Get-ComputerInfo | Select-Object OsVersion).osversion
 $DiskCount = (Get-Ciminstance CIM_LogicalDisk).Count
 
 # Finding the Freespace of the drive(s)
-$Freespace = (get-ciminstance CIM_LogicalDisk).freespace
+$Freespace = ($DiskInstance | Where-Object {$_.DeviceID -eq 'C:'}).freespace
+
+# Homework - Adding installed programs to the server repot list
+$Printers = (get-printer).Name
+
+# Homework - Adding System Type to Servcer Reprot 
+$systype = (Get-Computerinfo | Select-Object CsSystemType).CsSystemType
 
 # write some bad examples of output
 Write-Host "Server Name: $Name"
@@ -22,7 +28,9 @@ $obj = [PSCustomObject]@{
 ComputerName = $Name
 OSVersion = $Version
 DiscCount = $DiskCount
-'GB Free' = $Freespace / 1Gb
+'GB Free' = [System.Math]::Round($FreeSpace / 1Gb, 2)
+'Installed Printers' = $Printers
+OStype = $systype
 }
 
 #writing the output of the custom object 
